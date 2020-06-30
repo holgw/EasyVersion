@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EasyVersion.Core
 {
     public interface IVersionsManager
     {
-        int IncrementVersions(string projectDir, IncrementType incrementType);
+        string[] IncrementVersions(string projectDir, IncrementType incrementType);
     }
 
     class VersionsManager : IVersionsManager
@@ -22,9 +23,9 @@ namespace EasyVersion.Core
         }
 
         // METHODS
-        public int IncrementVersions(string projectDir, IncrementType incrementType)
+        public string[] IncrementVersions(string projectDir, IncrementType incrementType)
         {
-            int c = 0; // Счетчик обработанных файлов
+            var processedFilesList = new List<string>(); // Перечень обработанных файлов
 
             var files = _filesLoader.LoadFiles(projectDir);
             Console.WriteLine($"Files detected: {files.Length}");
@@ -39,7 +40,7 @@ namespace EasyVersion.Core
                 { 
                     _textFileEditor.WriteFile(file.Path, newContent);
                     Console.WriteLine($"    {file.Path} : {file.Version} [SUCCESS]");
-                    c++;
+                    processedFilesList.Add(file.Path);
                 }
                 else
                 {
@@ -47,7 +48,7 @@ namespace EasyVersion.Core
                 }
             }
 
-            return c;
+            return processedFilesList.ToArray();
         }
     }
 
