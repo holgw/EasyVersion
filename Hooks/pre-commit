@@ -1,0 +1,3 @@
+#!/bin/sh
+REPO_PATH="$(git rev-parse --show-toplevel)"
+"C:\Tools\EasyVersion\EasyVersion.CommandLine.exe" -c "HookHandle" -d "$REPO_PATH" -h "pre-commit"

@@ -32,7 +32,7 @@ namespace EasyVersion.HookHandlers
             // Закоммитим изменения
             Signature author = new Signature("git-hook", "@none", DateTime.Now);
             Signature committer = author;
-            Commit commit = repo.Commit("[AUTO COMMIT] Increment MAJOR version", author, committer);
+            Commit commit = repo.Commit("[AUTO COMMIT] Increment MINOR version", author, committer);
 
             Console.WriteLine($"Processing finished succesfully");
         }
